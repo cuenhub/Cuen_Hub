@@ -1,0 +1,2 @@
+-- if you want to see the source code, dm cuen#8917 for permission 
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/cuenhub/Cuen_Hub/main/code_obfuscated"))()
