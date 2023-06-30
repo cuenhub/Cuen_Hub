@@ -142,5 +142,3 @@ Intro:Destroy()
 
 
 wait(1)
-
-loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/cuenhub/Cuen_Hub/main/loader"))()
