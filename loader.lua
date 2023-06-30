@@ -139,6 +139,5 @@ end
 
 wait(0.5)
 Intro:Destroy()
-
-
 wait(1)
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/cuenhub/Cuen_Hub/main/code_obfuscated.lua"))()
