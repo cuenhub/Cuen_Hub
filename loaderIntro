@@ -1,0 +1,145 @@
+
+
+local Intro = Instance.new("ScreenGui")
+local Background = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local DropShadow = Instance.new("ImageLabel")
+local Title = Instance.new("TextLabel")
+local Loading = Instance.new("TextLabel")
+local Divider = Instance.new("Frame")
+
+Intro.Name = "Intro"
+Intro.ZIndexBehavior = Enum.ZIndexBehavior.Global
+Intro.Parent = game.Players.LocalPlayer.PlayerGui
+
+Background.Name = "Background"
+Background.Parent = Intro
+Background.AnchorPoint = Vector2.new(0.5, 0.5)
+Background.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Background.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Background.BorderSizePixel = 0
+Background.Position = UDim2.new(0.5, 0, 0.499208868, 0)
+Background.Size = UDim2.new(0.266114175, 0, 0.37183544, 0)
+
+UICorner.Parent = Background
+
+DropShadow.Name = "DropShadow"
+DropShadow.Parent = Background
+DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+DropShadow.BackgroundTransparency = 1.000
+DropShadow.BorderSizePixel = 0
+DropShadow.Position = UDim2.new(0.5, 0, 0.508510649, 0)
+DropShadow.Size = UDim2.new(1, 47, 1.0170213, 47)
+DropShadow.ZIndex = 0
+DropShadow.Image = "rbxassetid://6014261993"
+DropShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+DropShadow.ImageTransparency = 0.500
+DropShadow.ScaleType = Enum.ScaleType.Slice
+DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
+
+Title.Name = "Title"
+Title.Parent = Background
+Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1.000
+Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Title.BorderSizePixel = 0
+Title.Position = UDim2.new(0.152249128, 0, 0.282263309, 0)
+Title.Size = UDim2.new(0.692041516, 0, 0.212765962, 0)
+Title.Font = Enum.Font.SourceSansSemibold
+Title.Text = "Cuen Hub"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextScaled = true
+Title.TextSize = 14.000
+Title.TextWrapped = true
+
+Loading.Name = "Loading"
+Loading.Parent = Title
+Loading.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Loading.BackgroundTransparency = 1.000
+Loading.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Loading.BorderSizePixel = 0
+Loading.Position = UDim2.new(0.000709339976, 0, 1.31375277, 0)
+Loading.Size = UDim2.new(1, 0, 0.479999989, 0)
+Loading.Font = Enum.Font.SourceSans
+Loading.Text = "Welcome to Cuen Hub, @"..game.Players.LocalPlayer.Name
+Loading.TextColor3 = Color3.fromRGB(255, 255, 255)
+Loading.TextScaled = true
+Loading.TextSize = 14.000
+Loading.TextWrapped = true
+
+Divider.Name = "Divider"
+Divider.Parent = Background
+Divider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Divider.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Divider.BorderSizePixel = 0
+Divider.Position = UDim2.new(0.0553633198, 0, 0.497872353, 0)
+Divider.Size = UDim2.new(0.889273345, 0, 0.00425531901, 0)
+
+
+Background.BackgroundTransparency = 1
+Title.TextTransparency = 1
+Loading.TextTransparency = 1
+DropShadow.ImageTransparency = 1
+Divider.BackgroundTransparency = 1
+wait(1)
+
+local duration = 1 -- Duration of the fade effect in seconds
+local steps = 20 -- Number of steps for the fade effect
+
+for i = 1, steps do
+	local stepDuration = duration / steps
+	local transparencyStep = 0.05
+
+	Background.BackgroundTransparency -= transparencyStep
+	Title.TextTransparency -= transparencyStep
+	Loading.TextTransparency -= transparencyStep
+	DropShadow.ImageTransparency -= transparencyStep
+	Divider.BackgroundTransparency -= transparencyStep
+
+	wait(stepDuration)
+end
+
+local counter = 0
+
+while wait(0.5) do
+	Loading.Text = "Loading"
+	wait(0.5)
+	Loading.Text = "Loading."
+	wait(0.5)
+	Loading.Text = "Loading.."
+	wait(0.5)
+	Loading.Text = "Loading..."
+	counter = counter + 1
+	if counter >= 3 then
+		break
+
+	end
+end
+
+
+
+
+wait(1)
+Loading.Text = "Loaded Assets!"
+
+wait(1)
+
+for i = 1, steps do
+	local stepDuration = duration / steps
+	local transparencyStep = 0.05
+
+	Background.BackgroundTransparency += transparencyStep
+	Title.TextTransparency += transparencyStep
+	Loading.TextTransparency += transparencyStep
+	DropShadow.ImageTransparency += transparencyStep
+	Divider.BackgroundTransparency += transparencyStep
+
+	wait(stepDuration)
+end
+
+wait(0.5)
+Intro:Destroy()
+
+
+wait(1)
+
