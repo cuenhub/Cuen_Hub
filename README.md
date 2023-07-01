@@ -13,4 +13,8 @@ loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/cuenhub/Cuen_Hub
 
 Cuen Hub is updated every week as more and more gets added into the script.
 
+# UI Libraries used
 
+Current UI Library - [Vynixius](https://github.com/RegularVynixu/UI-Libraries/tree/main/Vynixius)
+
+Past UI Library - [Venyx](https://github.com/GreenDeno/Venyx-UI-Library)
