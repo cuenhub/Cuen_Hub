@@ -17,4 +17,7 @@ Cuen Hub is updated every week as more and more gets added into the script.
 
 Current UI Library - [Vynixius](https://github.com/RegularVynixu/UI-Libraries/tree/main/Vynixius)
 
+![Showcase](https://github.com/cuenhub/Cuen_Hub/blob/main/UI%20Libraries/Vynixius/vynixusPng.png?raw=true)
+
+
 Past UI Library - [Venyx](https://github.com/GreenDeno/Venyx-UI-Library)
