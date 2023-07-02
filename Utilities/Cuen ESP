@@ -20,8 +20,7 @@ function CreateEsp(Player)
     
     if Config.Chams then
         ChamsHighlight.Parent = Player.Character
-        ChamsHighlight.Transparency = 1
-        ChamsHighlight.Thickness = 1.5
+        ChamsHighlight.OutlineTransparency = 1
     end
 
     local function UpdateEsp()
@@ -104,10 +103,10 @@ function CreateEsp(Player)
             end
             
             if Config.Chams then
-                ChamsHighlight.Visible = IsVisible
-                ChamsHighlight.Color3 = Config.ChamsColor
+                ChamsHighlight.OutlineTransparency = 0
+                ChamsHighlight.OutlineColor3 = Config.ChamsColor
             else
-                ChamsHighlight.Visible = false
+            ChamsHighlight.OutlineTransparency = 1
             end
         else
             Box.Visible = false
@@ -115,7 +114,7 @@ function CreateEsp(Player)
             Name.Visible = false
             HealthBar.Visible = false
             HealthBarOutline.Visible = false
-            ChamsHighlight.Visible = false
+            ChamsHighlight.OutlineTransparency = 1
         end
     end
 
