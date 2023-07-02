@@ -7,11 +7,8 @@ end
 
 newPrint('Waiting for game to load.')
 
-repeat
-    wait()
-until game:IsLoaded()
 
-newPrint('Initializing Cuen ESP')
+newPrint('Initialized Cuen ES!P')
 
 pcall(function()
     for _,v in pairs(Players:GetPlayers()) do
