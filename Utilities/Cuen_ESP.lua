@@ -11,12 +11,10 @@ local Config = {
     NamesOutlineColor = Color3.fromRGB(0,0,0),
     NamesFont         = 2, -- 0,1,2,3
     NamesSize         = 13,
-    Chams             = false,
-    ChamsColor        = Color3.fromRGB(255, 255, 255),
 }
 
 function CreateEsp(Player)
-    local Box, BoxOutline, Name, HealthBar, HealthBarOutline, ChamsHighlight = Drawing.new("Square"), Drawing.new("Square"), Drawing.new("Text"), Drawing.new("Square"), Drawing.new("Square"), Instance.new("Highlight")
+    local Box, BoxOutline, Name, HealthBar, HealthBarOutline = Drawing.new("Square"), Drawing.new("Square"), Drawing.new("Text"), Drawing.new("Square"), Drawing.new("Square")
     
 
 
@@ -26,10 +24,7 @@ function CreateEsp(Player)
             local scale_factor = 1 / (Target2dPosition.Z * math.tan(math.rad(workspace.CurrentCamera.FieldOfView * 0.5)) * 2) * 100
             local width, height = math.floor(40 * scale_factor), math.floor(60 * scale_factor)
 
-            if Config.Chams then
-                ChamsHighlight.Parent = Player.Character
-                ChamsHighlight.OutlineTransparency = 1
-           end
+           
             
             if Config.Box then
                 Box.Visible = IsVisible
@@ -104,19 +99,12 @@ function CreateEsp(Player)
                 HealthBarOutline.Visible = false
             end
             
-            if Config.Chams then
-                ChamsHighlight.OutlineTransparency = 0
-                ChamsHighlight.OutlineColor3 = Config.ChamsColor
-            else
-            ChamsHighlight.OutlineTransparency = 1
-            end
         else
             Box.Visible = false
             BoxOutline.Visible = false
             Name.Visible = false
             HealthBar.Visible = false
             HealthBarOutline.Visible = false
-            ChamsHighlight.OutlineTransparency = 1
         end
     end
 
