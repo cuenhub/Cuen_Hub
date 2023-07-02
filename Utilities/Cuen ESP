@@ -1,4 +1,3 @@
--- made by rang#2415 or https://v3rmillion.net/member.php?action=profile&uid=1906262
 local Config = {
     Box               = false,
     BoxOutline        = false,
@@ -16,8 +15,8 @@ local Config = {
 
 function CreateEsp(Player)
     local Box,BoxOutline,Name,HealthBar,HealthBarOutline = Drawing.new("Square"),Drawing.new("Square"),Drawing.new("Text"),Drawing.new("Square"),Drawing.new("Square")
-    local Updater = game:GetService("RunService").RenderStepped:Connect(function()
-    if Player.Character ~= nil and Player.Character:FindFirstChild("Humanoid") ~= nil and Player.Character:FindFirstChild("HumanoidRootPart") ~= nil and Player.Character.Humanoid.Health > 0 and Player.Character:FindFirstChild("Head") ~= nil then
+    local function UpdateEsp()
+        if Player.Character and Player.Character:FindFirstChild("Humanoid") and Player.Character:FindFirstChild("HumanoidRootPart") and Player.Character:FindFirstChild("Head") then
             local Target2dPosition,IsVisible = workspace.CurrentCamera:WorldToViewportPoint(Player.Character.HumanoidRootPart.Position)
             local scale_factor = 1 / (Target2dPosition.Z * math.tan(math.rad(workspace.CurrentCamera.FieldOfView * 0.5)) * 2) * 100
             local width, height = math.floor(40 * scale_factor), math.floor(60 * scale_factor)
@@ -74,16 +73,17 @@ function CreateEsp(Player)
                     HealthBar.Position = HealthBarOutline.Position + Vector2.new(1,-1 + HealthBarOutline.Size.Y)
                 elseif Config.HealthBarSide == "Bottom" then
                     HealthBarOutline.Size = Vector2.new(width,3)
-                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2,Target2dPosition.Y - Box.Size.Y / 2) + Vector2.new(0,height + 2)
-
-                    HealthBar.Size = Vector2.new((HealthBarOutline.Size.X - 2) * (Player.Character:FindFirstChild("Humanoid").Health/Player.Character:FindFirstChild("Humanoid").MaxHealth),1)
-                    HealthBar.Position = HealthBarOutline.Position + Vector2.new(1,-1 + HealthBarOutline.Size.Y)
+                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / HealthBarOutline.Size = Vector2.new(width,3)
+                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2,Target2dPosition.Y + Box.Size.Y / 2) + Vector2.new(0, 3)
+                    
+                    HealthBar.Size = Vector2.new((HealthBarOutline.Size.X - 2) * (Player.Character:FindFirstChild("Humanoid").Health/Player.Character:FindFirstChild("Humanoid").MaxHealth), 1)
+                    HealthBar.Position = HealthBarOutline.Position + Vector2.new(1,-1)
                 elseif Config.HealthBarSide == "Right" then
                     HealthBarOutline.Size = Vector2.new(2,height)
-                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2,Target2dPosition.Y - Box.Size.Y / 2) + Vector2.new(width + 1,0)
+                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X + Box.Size.X / 2,Target2dPosition.Y - Box.Size.Y / 2) + Vector2.new(3,0)
                     
                     HealthBar.Size = Vector2.new(1,-(HealthBarOutline.Size.Y - 2) * (Player.Character:FindFirstChild("Humanoid").Health/Player.Character:FindFirstChild("Humanoid").MaxHealth))
-                    HealthBar.Position = HealthBarOutline.Position + Vector2.new(1,-1 + HealthBarOutline.Size.Y)
+                    HealthBar.Position = HealthBarOutline.Position + Vector2.new(-1,-1 + HealthBarOutline.Size.Y)
                 end
             else
                 HealthBar.Visible = false
@@ -95,29 +95,25 @@ function CreateEsp(Player)
             Name.Visible = false
             HealthBar.Visible = false
             HealthBarOutline.Visible = false
-            if not Player then
-                Box:Remove()
-                BoxOutline:Remove()
-                Name:Remove()
-                HealthBar:Remove()
-                HealthBarOutline:Remove()
-                Updater:Disconnect()
-            end
         end
-    end)
+    end
+
+    Player.CharacterAdded:Connect(UpdateEsp)  -- Call the UpdateEsp function directly
+    
+    if Player.Character then
+        UpdateEsp()  -- Call the UpdateEsp function immediately
+    end
 end
 
 for _, v in pairs(game:GetService("Players"):GetPlayers()) do
     if v ~= game:GetService("Players").LocalPlayer then
         CreateEsp(v)
-        v.CharacterAdded:Connect(CreateEsp)  -- Remove the parentheses here
     end
 end
 
 game:GetService("Players").PlayerAdded:Connect(function(v)
     if v ~= game:GetService("Players").LocalPlayer then
         CreateEsp(v)
-        v.CharacterAdded:Connect(CreateEsp)  -- Remove the parentheses here
     end
 end)
 
