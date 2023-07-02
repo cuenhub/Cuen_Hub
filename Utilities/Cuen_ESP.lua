@@ -10,35 +10,28 @@ local Config = {
     NamesColor        = Color3.fromRGB(255,255,255),
     NamesOutlineColor = Color3.fromRGB(0,0,0),
     NamesFont         = 2, -- 0,1,2,3
-    NamesSize         = 13,
+    NamesSize         = 13
 }
 
 function CreateEsp(Player)
-    local Box, BoxOutline, Name, HealthBar, HealthBarOutline = Drawing.new("Square"), Drawing.new("Square"), Drawing.new("Text"), Drawing.new("Square"), Drawing.new("Square")
-    
-
-
+    local Box,BoxOutline,Name,HealthBar,HealthBarOutline = Drawing.new("Square"),Drawing.new("Square"),Drawing.new("Text"),Drawing.new("Square"),Drawing.new("Square")
     local function UpdateEsp()
         if Player.Character and Player.Character:FindFirstChild("Humanoid") and Player.Character:FindFirstChild("HumanoidRootPart") and Player.Character:FindFirstChild("Head") then
-            local Target2dPosition, IsVisible = workspace.CurrentCamera:WorldToViewportPoint(Player.Character.HumanoidRootPart.Position)
+            local Target2dPosition,IsVisible = workspace.CurrentCamera:WorldToViewportPoint(Player.Character.HumanoidRootPart.Position)
             local scale_factor = 1 / (Target2dPosition.Z * math.tan(math.rad(workspace.CurrentCamera.FieldOfView * 0.5)) * 2) * 100
             local width, height = math.floor(40 * scale_factor), math.floor(60 * scale_factor)
-
-           
-            
             if Config.Box then
                 Box.Visible = IsVisible
                 Box.Color = Config.BoxColor
-                Box.Size = Vector2.new(width, height)
-                Box.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2, Target2dPosition.Y - Box.Size.Y / 2)
+                Box.Size = Vector2.new(width,height)
+                Box.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2,Target2dPosition.Y - Box.Size.Y / 2)
                 Box.Thickness = 1
                 Box.ZIndex = 69
-                
                 if Config.BoxOutline then
                     BoxOutline.Visible = IsVisible
                     BoxOutline.Color = Config.BoxOutlineColor
-                    BoxOutline.Size = Vector2.new(width, height)
-                    BoxOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2, Target2dPosition.Y - Box.Size.Y / 2)
+                    BoxOutline.Size = Vector2.new(width,height)
+                    BoxOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2,Target2dPosition.Y - Box.Size.Y / 2)
                     BoxOutline.Thickness = 3
                     BoxOutline.ZIndex = 1
                 else
@@ -48,7 +41,6 @@ function CreateEsp(Player)
                 Box.Visible = false
                 BoxOutline.Visible = false
             end
-            
             if Config.Names then
                 Name.Visible = IsVisible
                 Name.Color = Config.NamesColor
@@ -62,7 +54,6 @@ function CreateEsp(Player)
             else
                 Name.Visible = false
             end
-            
             if Config.HealthBar then
                 HealthBarOutline.Visible = IsVisible
                 HealthBarOutline.Color = Color3.fromRGB(0,0,0)
@@ -74,31 +65,29 @@ function CreateEsp(Player)
                 HealthBar.Thickness = 1
                 HealthBar.Filled = true
                 HealthBar.ZIndex = 69
-                
                 if Config.HealthBarSide == "Left" then
-                    HealthBarOutline.Size = Vector2.new(2, height)
-                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2, Target2dPosition.Y - Box.Size.Y / 2) + Vector2.new(-3, 0)
+                    HealthBarOutline.Size = Vector2.new(2,height)
+                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2,Target2dPosition.Y - Box.Size.Y / 2) + Vector2.new(-3,0)
                     
-                    HealthBar.Size = Vector2.new(1, -(HealthBarOutline.Size.Y - 2) * (Player.Character:FindFirstChild("Humanoid").Health/Player.Character:FindFirstChild("Humanoid").MaxHealth))
+                    HealthBar.Size = Vector2.new(1,-(HealthBarOutline.Size.Y - 2) * (Player.Character:FindFirstChild("Humanoid").Health/Player.Character:FindFirstChild("Humanoid").MaxHealth))
                     HealthBar.Position = HealthBarOutline.Position + Vector2.new(1,-1 + HealthBarOutline.Size.Y)
                 elseif Config.HealthBarSide == "Bottom" then
-                    HealthBarOutline.Size = Vector2.new(width, 3)
-                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2, Target2dPosition.Y + Box.Size.Y / 2) + Vector2.new(0, 3)
+                    HealthBarOutline.Size = Vector2.new(width,3)
+                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2,Target2dPosition.Y + Box.Size.Y / 2) + Vector2.new(0, 3)
                     
                     HealthBar.Size = Vector2.new((HealthBarOutline.Size.X - 2) * (Player.Character:FindFirstChild("Humanoid").Health/Player.Character:FindFirstChild("Humanoid").MaxHealth), 1)
-                    HealthBar.Position = HealthBarOutline.Position + Vector2.new(1, -1)
+                    HealthBar.Position = HealthBarOutline.Position + Vector2.new(1,-1)
                 elseif Config.HealthBarSide == "Right" then
-                    HealthBarOutline.Size = Vector2.new(2, height)
-                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X + Box.Size.X / 2, Target2dPosition.Y - Box.Size.Y / 2) + Vector2.new(3, 0)
+                    HealthBarOutline.Size = Vector2.new(2,height)
+                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X + Box.Size.X / 2,Target2dPosition.Y - Box.Size.Y / 2) + Vector2.new(3,0)
                     
-                    HealthBar.Size = Vector2.new(1, -(HealthBarOutline.Size.Y - 2) * (Player.Character:FindFirstChild("Humanoid").Health/Player.Character:FindFirstChild("Humanoid").MaxHealth))
-                    HealthBar.Position = HealthBarOutline.Position + Vector2.new(-1, -1 + HealthBarOutline.Size.Y)
+                    HealthBar.Size = Vector2.new(1,-(HealthBarOutline.Size.Y - 2) * (Player.Character:FindFirstChild("Humanoid").Health/Player.Character:FindFirstChild("Humanoid").MaxHealth))
+                    HealthBar.Position = HealthBarOutline.Position + Vector2.new(-1,-1 + HealthBarOutline.Size.Y)
                 end
             else
                 HealthBar.Visible = false
                 HealthBarOutline.Visible = false
             end
-            
         else
             Box.Visible = false
             BoxOutline.Visible = false
