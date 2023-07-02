@@ -18,16 +18,18 @@ local Config = {
 function CreateEsp(Player)
     local Box, BoxOutline, Name, HealthBar, HealthBarOutline, ChamsHighlight = Drawing.new("Square"), Drawing.new("Square"), Drawing.new("Text"), Drawing.new("Square"), Drawing.new("Square"), Instance.new("Highlight")
     
-    if Config.Chams then
-        ChamsHighlight.Parent = Player.Character
-        ChamsHighlight.OutlineTransparency = 1
-    end
+
 
     local function UpdateEsp()
         if Player.Character and Player.Character:FindFirstChild("Humanoid") and Player.Character:FindFirstChild("HumanoidRootPart") and Player.Character:FindFirstChild("Head") then
             local Target2dPosition, IsVisible = workspace.CurrentCamera:WorldToViewportPoint(Player.Character.HumanoidRootPart.Position)
             local scale_factor = 1 / (Target2dPosition.Z * math.tan(math.rad(workspace.CurrentCamera.FieldOfView * 0.5)) * 2) * 100
             local width, height = math.floor(40 * scale_factor), math.floor(60 * scale_factor)
+
+            if Config.Chams then
+                ChamsHighlight.Parent = Player.Character
+                ChamsHighlight.OutlineTransparency = 1
+           end
             
             if Config.Box then
                 Box.Visible = IsVisible
