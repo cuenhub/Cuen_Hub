@@ -11,8 +11,8 @@ local Config = {
     NamesOutlineColor = Color3.fromRGB(0,0,0),
     NamesFont         = 2, -- 0,1,2,3
     NamesSize         = 13,
-    Chams             = true,
-    ChamsColor        = Color3.fromRGB(255, 0, 0),
+    Chams             = false,
+    ChamsColor        = Color3.fromRGB(255, 255, 255),
 }
 
 function CreateEsp(Player)
