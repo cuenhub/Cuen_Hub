@@ -20,7 +20,7 @@ function CreateEsp(Player)
     local Box, BoxOutline, Name, HealthBar, HealthBarOutline = Drawing.new("Square"), Drawing.new("Square"), Drawing.new("Text"), Drawing.new("Square"), Drawing.new("Square")
     local Updater
 
-    Updater = game:GetService("RunService").RenderStepped:Connect(function()
+    Updater = game:GetService("RunService").Heartbeat:Connect(function()
         if Player.Character ~= nil and Player.Character:FindFirstChild("Humanoid") ~= nil and Player.Character:FindFirstChild("HumanoidRootPart") ~= nil and Player.Character.Humanoid.Health > 0 and Player.Character:FindFirstChild("Head") ~= nil then
             local Target2dPosition, IsVisible = workspace.CurrentCamera:WorldToViewportPoint(Player.Character.HumanoidRootPart.Position)
             local scale_factor = 1 / (Target2dPosition.Z * math.tan(math.rad(workspace.CurrentCamera.FieldOfView * 0.5)) * 2) * 100
@@ -117,15 +117,13 @@ function CreateEsp(Player)
     end)
 end
 
-local function onCharacterAdded(player)
-    CreateEsp(player)
-end
+
 
 for _, v in pairs(game:GetService("Players"):GetPlayers()) do
     if v ~= game:GetService("Players").LocalPlayer then
         CreateEsp(v)
         v.CharacterAdded:Connect(function()
-            onCharacterAdded(v)
+                CreateEsp(v)
         end)
     end
 end
@@ -134,7 +132,7 @@ game:GetService("Players").PlayerAdded:Connect(function(player)
     if player ~= game:GetService("Players").LocalPlayer then
         CreateEsp(player)
         player.CharacterAdded:Connect(function()
-            onCharacterAdded(player)
+                    CreateEsp(player)
         end)
     end
 end)
