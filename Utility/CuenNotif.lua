@@ -35,7 +35,7 @@ function createBaseNotifications()
     SepVertical.BackgroundTransparency = 0.5
     SepVertical.Position = UDim2.new(0.7423077, 0, 0, 0)
     SepVertical.BorderSizePixel = 0
-    SepVertical.BackgroundColor3 = Color3.fromRGB(68, 68, 68)
+    SepVertical.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     SepVertical.Parent = ToggleNotif
     
     local SepHorizontal = Instance.new("Frame")
