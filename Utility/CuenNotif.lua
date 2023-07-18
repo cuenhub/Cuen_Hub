@@ -14,7 +14,7 @@ function createBaseNotifications()
     ToggleNotif.Visible = false
     ToggleNotif.Size = UDim2.new(0, 291, 0, 56)
     ToggleNotif.Position = UDim2.new(1, 0, 1, 0)
-    ToggleNotif.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
+    ToggleNotif.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
     ToggleNotif.Parent = ScreenGui
     
     local UiCorner = Instance.new("UICorner")
@@ -145,6 +145,7 @@ function createBaseNotifications()
     Title1.TextColor3 = Color3.fromRGB(255, 255, 255)
     Title1.Font = Enum.Font.SourceSans
     Title1.Parent = DefaultNotif
+    Title1.TextXAlignment = Enum.TextXAlignment.Left
     
     local Paragraph1 = Instance.new("TextLabel")
     Paragraph1.Name = "Paragraph"
