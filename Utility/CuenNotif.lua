@@ -58,6 +58,8 @@ function createBaseNotifications()
     Title.TextColor3 = Color3.fromRGB(255, 255, 255)
     Title.Font = Enum.Font.SourceSans
     Title.Parent = ToggleNotif
+    Title1.TextXAlignment = Enum.TextXAlignment.Left
+
     
     local Paragraph = Instance.new("TextLabel")
     Paragraph.Name = "Paragraph"
