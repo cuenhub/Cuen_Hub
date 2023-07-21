@@ -1007,6 +1007,86 @@ function Library:AddWindow(settings)
                 return Button
             end
 
+-- Small Button
+
+function Section:AddButton(name, callback)
+    local Button = {
+        Name = name,
+        Type = "Button",
+        Callback = callback,
+    }
+
+    Button.Frame = SelfModules.UI.Create("Frame", {
+        Name = name,
+        BackgroundColor3 = SelfModules.UI.Color.Add(Library.Theme.SectionColor, Color3.fromRGB(15, 15, 15)),
+        Size = UDim2.new(1, 2, 0, 24),
+        Position = UDim2.new(0.5, 0, 0.5, 0),
+        AnchorPoint = Vector2.new(0.5, 0.5),
+        
+        SelfModules.UI.Create("Frame", {
+            Name = "Holder",
+            BackgroundColor3 = SelfModules.UI.Color.Add(Library.Theme.SectionColor, Color3.fromRGB(5, 5, 5)),
+            Size = UDim2.new(1, -2, 1, -2),
+            Position = UDim2.new(0, 1, 0, 1),
+
+            SelfModules.UI.Create("TextButton", {
+                Name = "Button",
+                BackgroundColor3 = SelfModules.UI.Color.Add(Library.Theme.SectionColor, Color3.fromRGB(15, 15, 15)),
+                Position = UDim2.new(0, 2, 0, 2),
+                Size = UDim2.new(1, -4, 1, -4),
+                AutoButtonColor = false,
+                Font = Enum.Font.SourceSans,
+                Text = name,
+                TextColor3 = Library.Theme.TextColor,
+                TextSize = 14,
+                TextWrapped = true,
+            }, UDim.new(0, 5)),
+        }, UDim.new(0, 5)),
+    }, UDim.new(0.5, 0, 0.5, 0))
+
+    -- Functions
+
+    local function buttonVisual()
+        task.spawn(function()
+            local Visual = SelfModules.UI.Create("Frame", {
+                Name = "Visual",
+                AnchorPoint = Vector2.new(0.5, 0.5),
+                BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+                BackgroundTransparency = 0.9,
+                Position = UDim2.new(0.5, 0, 0.5, 0),
+                Size = UDim2.new(0, 0, 1, 0),
+            }, UDim.new(0, 5))
+
+            Visual.Parent = Button.Frame.Holder.Button
+            tween(Visual, 0.5, { Size = UDim2.new(1, 0, 1, 0), BackgroundTransparency = 1 })
+            task.wait(0.5)
+            Visual:Destroy()
+        end)
+    end
+
+    -- Scripts
+
+    Section.List[#Section.List + 1] = Button
+    Button.Frame.Parent = Section.Frame.List
+
+    Button.Frame.Holder.Button.MouseButton1Down:Connect(function()
+        Button.Frame.Holder.Button.TextSize = 12
+    end)
+
+    Button.Frame.Holder.Button.MouseButton1Up:Connect(function()
+        Button.Frame.Holder.Button.TextSize = 14
+        buttonVisual()
+
+        pcall(task.spawn, Button.Callback)
+    end)
+
+    Button.Frame.Holder.Button.MouseLeave:Connect(function()
+        Button.Frame.Holder.Button.TextSize = 14
+    end)
+
+    return Button
+end
+
             -- Toggle
 
             function Section:AddToggle(name, settings, callback)
