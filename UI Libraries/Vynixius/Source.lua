@@ -1009,7 +1009,7 @@ function Library:AddWindow(settings)
 
 -- Small Button
 
-function Section:AddButton(name, callback)
+function Section:AddSmallButton(name, callback)
     local Button = {
         Name = name,
         Type = "Button",
