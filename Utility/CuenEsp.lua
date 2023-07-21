@@ -1,140 +1,110 @@
--- made by rang#2415 or https://v3rmillion.net/member.php?action=profile&uid=1906262
-local Color3 = Color3 or require("Color3Module") -- Make sure to replace "Color3Module" with the actual name of the module if you have one
+-- Create a function to draw the player ESP
+function PlayerESP.draw(player)
+    if PlayerESP.visible then
+        local character = player.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            local rootPart = character.HumanoidRootPart
+            local camera = workspace.CurrentCamera
 
-local Config = {
-    Box               = false,
-    BoxOutline        = false,
-    BoxColor          = Color3.fromRGB(255, 255, 255),
-    BoxOutlineColor   = Color3.fromRGB(0, 0, 0),
-    HealthBar         = false,
-    HealthBarSide     = "Left", -- Left,Bottom,Right
-    Names             = false,
-    NamesOutline      = false,
-    NamesColor        = Color3.fromRGB(255, 255, 255),
-    NamesOutlineColor = Color3.fromRGB(0, 0, 0),
-    NamesFont         = 2, -- 0,1,2,3
-    NamesSize         = 13
-}
-
-function CreateEsp(Player)
-    local Box, BoxOutline, Name, HealthBar, HealthBarOutline = Drawing.new("Square"), Drawing.new("Square"), Drawing.new("Text"), Drawing.new("Square"), Drawing.new("Square")
-    local Updater
-
-    Updater = game:GetService("RunService").Heartbeat:Connect(function()
-        if Player.Character ~= nil and Player.Character:FindFirstChild("Humanoid") ~= nil and Player.Character:FindFirstChild("HumanoidRootPart") ~= nil and Player.Character.Humanoid.Health > 0 and Player.Character:FindFirstChild("Head") ~= nil then
-            local Target2dPosition, IsVisible = workspace.CurrentCamera:WorldToViewportPoint(Player.Character.HumanoidRootPart.Position)
-            local scale_factor = 1 / (Target2dPosition.Z * math.tan(math.rad(workspace.CurrentCamera.FieldOfView * 0.5)) * 2) * 100
-            local width, height = math.floor(40 * scale_factor), math.floor(60 * scale_factor)
-            
-            if Config.Box then
-                Box.Visible = IsVisible
-                Box.Color = Config.BoxColor
-                Box.Size = Vector2.new(width, height)
-                Box.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2, Target2dPosition.Y - Box.Size.Y / 2)
-                Box.Thickness = 1
-                Box.ZIndex = 69
-                
-                if Config.BoxOutline then
-                    BoxOutline.Visible = IsVisible
-                    BoxOutline.Color = Config.BoxOutlineColor
-                    BoxOutline.Size = Vector2.new(width, height)
-                    BoxOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2, Target2dPosition.Y - Box.Size.Y / 2)
-                    BoxOutline.Thickness = 3
-                    BoxOutline.ZIndex = 1
-                else
-                    BoxOutline.Visible = false
+            -- Draw the box
+            if PlayerESP.settings.box then
+                local box = Drawing.new("Square")
+                box.Visible = true
+                box.Color = PlayerESP.settings.color
+                box.Thickness = 1
+                box.Transparency = 0.5
+                box.Filled = false
+                box.Position = Vector2.new(rootPart.Position.X, rootPart.Position.Z)
+                box.Size = Vector2.new(50, 100)
+                if PlayerESP.settings.box then
+                    box.Filled = true
                 end
-            else
-                Box.Visible = false
-                BoxOutline.Visible = false
-            end
-            
-            if Config.Names then
-                Name.Visible = IsVisible
-                Name.Color = Config.NamesColor
-                Name.Text = Player.Name .. " " .. math.floor((workspace.CurrentCamera.CFrame.p - Player.Character.HumanoidRootPart.Position).magnitude) .. "m"
-                Name.Center = true
-                Name.Outline = Config.NamesOutline
-                Name.OutlineColor = Config.NamesOutlineColor
-                Name.Position = Vector2.new(Target2dPosition.X, Target2dPosition.Y - height * 0.5 + -15)
-                Name.Font = Config.NamesFont
-                Name.Size = Config.NamesSize
-            else
-                Name.Visible = false
-            end
-            
-            if Config.HealthBar then
-                HealthBarOutline.Visible = IsVisible
-                HealthBarOutline.Color = Color3.fromRGB(0, 0, 0)
-                HealthBarOutline.Filled = true
-                HealthBarOutline.ZIndex = 1
-
-                HealthBar.Visible = IsVisible
-                HealthBar.Color = Color3.fromRGB(255, 0, 0):lerp(Color3.fromRGB(0, 255, 0), Player.Character:FindFirstChild("Humanoid").Health / Player.Character:FindFirstChild("Humanoid").MaxHealth)
-                HealthBar.Thickness = 1
-                HealthBar.Filled = true
-                HealthBar.ZIndex = 69
-                
-                if Config.HealthBarSide == "Left" then
-                    HealthBarOutline.Size = Vector2.new(2, height)
-        HealthBarOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2, Target2dPosition.Y - Box.Size.Y / 2) + Vector2.new(-3, 0)
-
-                    HealthBar.Size = Vector2.new(1, -(HealthBarOutline.Size.Y - 2) * (Player.Character:FindFirstChild("Humanoid").Health / Player.Character:FindFirstChild("Humanoid").MaxHealth))
-                    HealthBar.Position = HealthBarOutline.Position + Vector2.new(1, -1 + HealthBarOutline.Size.Y)
-                elseif Config.HealthBarSide == "Bottom" then
-                    HealthBarOutline.Size = Vector2.new(width, 3)
-                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2, Target2dPosition.Y - Box.Size.Y / 2) + Vector2.new(0, height + 2)
-
-                    HealthBar.Size = Vector2.new((HealthBarOutline.Size.X - 2) * (Player.Character:FindFirstChild("Humanoid").Health / Player.Character:FindFirstChild("Humanoid").MaxHealth), 1)
-                    HealthBar.Position = HealthBarOutline.Position + Vector2.new(1, -1 + HealthBarOutline.Size.Y)
-                elseif Config.HealthBarSide == "Right" then
-                    HealthBarOutline.Size = Vector2.new(2, height)
-                    HealthBarOutline.Position = Vector2.new(Target2dPosition.X - Box.Size.X / 2, Target2dPosition.Y - Box.Size.Y / 2) + Vector2.new(width + 1, 0)
-
-                    HealthBar.Size = Vector2.new(1, -(HealthBarOutline.Size.Y - 2) * (Player.Character:FindFirstChild("Humanoid").Health / Player.Character:FindFirstChild("Humanoid").MaxHealth))
-                    HealthBar.Position = HealthBarOutline.Position + Vector2.new(1, -1 + HealthBarOutline.Size.Y)
+                if PlayerESP.settings.outline then
+                    local boxOutline = Drawing.new("Square")
+                    boxOutline.Visible = true
+                    boxOutline.Color = PlayerESP.settings.outlineColor
+                    boxOutline.Thickness = 1
+                    boxOutline.Transparency = 0.5
+                    boxOutline.Filled = false
+                    boxOutline.Position = Vector2.new(rootPart.Position.X, rootPart.Position.Z)
+                    boxOutline.Size = Vector2.new(50, 100)
                 end
-            else
-                HealthBar.Visible = false
-                HealthBarOutline.Visible = false
             end
-        else
-            Box.Visible = false
-            BoxOutline.Visible = false
-            Name.Visible = false
-            HealthBar.Visible = false
-            HealthBarOutline.Visible = false
 
-            if not Player then
-                Box:Remove()
-                BoxOutline:Remove()
-                Name:Remove()
-                HealthBar:Remove()
-                HealthBarOutline:Remove()
-                Updater:Disconnect()
+            -- Draw the name
+            if PlayerESP.settings.name then
+                local name = Drawing.new("Text")
+                name.Visible = true
+                name.Color = PlayerESP.settings.nameColor
+                name.Size = PlayerESP.settings.textSize
+                name.Center = true
+                name.Outline = true
+                name.OutlineColor = Color3.new(0, 0, 0)
+                name.Text = player.Name
+                name.Position = Vector2.new(rootPart.Position.X, rootPart.Position.Z - 50)
+                if PlayerESP.settings.outline then
+                    local nameOutline = Drawing.new("Text")
+                    nameOutline.Visible = true
+                    nameOutline.Color = PlayerESP.settings.outlineColor
+                    nameOutline.Size = PlayerESP.settings.textSize
+                    nameOutline.Center = true
+                    nameOutline.Outline = true
+                    nameOutline.OutlineColor = Color3.new(0, 0, 0)
+                    nameOutline.Text = player.Name
+                    nameOutline.Position = Vector2.new(rootPart.Position.X + 1, rootPart.Position.Z - 49)
+                end
+            end
+
+            -- Draw the distance if the player is far enough away
+            if PlayerESP.settings.distance and rootPart.Position ~= camera.CFrame.p then
+                local distance = (rootPart.Position - camera.CFrame.p).Magnitude
+                if distance > PlayerESP.settings.distanceThreshold then
+                    local distanceText = Drawing.new("Text")
+                    distanceText.Visible = true
+                    distanceText.Color = PlayerESP.settings.distanceColor
+                    distanceText.Size = PlayerESP.settings.textSize
+                    distanceText.Center = true
+                    distanceText.Outline = true
+                    distanceText.OutlineColor = Color3.new(0, 0, 0)
+                    distanceText.Text = string.format("%.1f", distance)
+                    distanceText.Position = Vector2.new(rootPart.Position.X, rootPart.Position.Z - 70)
+                    if PlayerESP.settings.outline then
+                        local distanceOutline = Drawing.new("Text")
+                        distanceOutline.Visible = true
+                        distanceOutline.Color = PlayerESP.settings.outlineColor
+                        distanceOutline.Size = PlayerESP.settings.textSize
+                        distanceOutline.Center = true
+                        distanceOutline.Outline = true
+                        distanceOutline.OutlineColor = Color3.new(0, 0, 0)
+                        distanceOutline.Text = string.format("%.1f", distance)
+                        distanceOutline.Position = Vector2.new(rootPart.Position.X + 1, rootPart.Position.Z - 69)
+                    end
+                end
+            end
+
+            -- Draw the tracer
+            if PlayerESP.settings.tracer then
+                local ray = Ray.new(camera.CFrame.p, (rootPart.Position - camera.CFrame.p).Unit * 1000)
+                local part, position = workspace:FindPartOnRay(ray, player.Character)
+                if part and part:IsDescendantOf(player.Character) then
+                    local tracer = Drawing.new("Line")
+                    tracer.Visible = true
+                    tracer.Color = PlayerESP.settings.tracerColor
+                    tracer.Thickness = PlayerESP.settings.tracerThickness
+                    tracer.Transparency = 0.5
+                    tracer.From = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
+                    tracer.To = camera:WorldToViewportPoint(position)
+                    if PlayerESP.settings.outline then
+                        local tracerOutline = Drawing.new("Line")
+                        tracerOutline.Visible = true
+                        tracerOutline.Color =PlayerESP.settings.outlineColor
+                        tracerOutline.Thickness = PlayerESP.settings.tracerThickness
+                        tracerOutline.Transparency = 0.5
+                        tracerOutline.From = Vector2.new(camera.ViewportSize.X / 2 + 1, camera.ViewportSize.Y / 2 + 1)
+                        tracerOutline.To = camera:WorldToViewportPoint(position)
+                    end
+                end
             end
         end
-    end)
-end
-
-
-
-for _, v in pairs(game:GetService("Players"):GetPlayers()) do
-    if v ~= game:GetService("Players").LocalPlayer then
-        CreateEsp(v)
-        v.CharacterAdded:Connect(function()
-                CreateEsp(v)
-        end)
     end
 end
-
-game:GetService("Players").PlayerAdded:Connect(function(player)
-    if player ~= game:GetService("Players").LocalPlayer then
-        CreateEsp(player)
-        player.CharacterAdded:Connect(function()
-                    CreateEsp(player)
-        end)
-    end
-end)
-
-return Config
