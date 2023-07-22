@@ -355,7 +355,7 @@ function espLibrary:AddObjectEsp(object, defaultOptions)
     options.limitDistance = options.limitDistance or false;
     options.maxDistance = options.maxDistance or false;
     options.visibleOnly = options.visibleOnly or false;
-    options.color = options.color or color3New(1, 1, 1);
+    options.color = options.color or color3FromRGB(255, 255, 255);
     options.transparency = options.transparency or 1;
     options.text = options.text or object.Name;
     options.font = options.font or 2;
