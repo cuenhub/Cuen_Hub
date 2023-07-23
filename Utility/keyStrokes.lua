@@ -11,9 +11,6 @@ local MouseButton2 = Instance.new("TextLabel")
 local CPS = Instance.new("TextLabel")
 local FPS = Instance.new("TextLabel")
 
-if syn and syn.protect_gui then
-	syn.protect_gui(Keystrokes)
-end
 
 --Properties:
 
