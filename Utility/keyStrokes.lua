@@ -15,7 +15,7 @@ local FPS = Instance.new("TextLabel")
 --Properties:
 
 Keystrokes.Name = "Keystrokes"
-Keystrokes.Parent = (gethui and gethui()) or (get_hidden_ui and get_hidden_ui()) or game.CoreGui
+Keystrokes.Parent = game.CoreGui
 Keystrokes.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Main.Name = "Main"
