@@ -175,7 +175,7 @@ function createBaseNotifications()
         syn.protect_gui(ScreenGui)
     end
     
-    ScreenGui.Parent = game:GetService("Players").LocalPlayer.PlayerGui
+    ScreenGui.Parent = game.CoreGui
     return ScreenGui
 end
 
