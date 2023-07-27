@@ -85,8 +85,7 @@ Deny.Position = UDim2.new(0.14705883, 0, 0.839285731, 0)
 Deny.Size = UDim2.new(0, 50, 0, 50)
 Deny.ZIndex = 5
 Deny.Image = "http://www.roblox.com/asset/?id=4334829743"
-Deny.ImageColor3 = middledebug.DenyColor
-
+Deny.ImageColor3 = Color3.fromRGB(255,255,255)
 Agree.Name = "Agree"
 Agree.Parent = Window
 Agree.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -95,7 +94,7 @@ Agree.Position = UDim2.new(0.690441489, 0, 0.839285731, 0)
 Agree.Size = UDim2.new(0, 50, 0, 50)
 Agree.ZIndex = 5
 Agree.Image = "http://www.roblox.com/asset/?id=4334829743"
-Agree.ImageColor3 = middledebug.AgreeColor
+Agree.ImageColor3 = Color3.fromRGB(255,255,255)
 
 Divider.Name = "Divider"
 Divider.Parent = Window
