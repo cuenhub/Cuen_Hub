@@ -13,8 +13,6 @@ local Deny = Instance.new("ImageButton")
 local Agree = Instance.new("ImageButton")
 local Divider = Instance.new("Frame")
 
-apache
-Copy
 ambientShadow.Name = "ambientShadow"
 ambientShadow.Parent = GUI
 ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
