@@ -347,30 +347,61 @@ function espLibrary.removeObject(object)
 end
 
 function espLibrary:AddObjectEsp(object, defaultOptions)
-    assert(object and object.Parent, "invalid object passed");
+    assert(object and object.Parent, "invalid object passed")
 
-    local options = defaultOptions or {};
+    local options = defaultOptions or {}
 
-    options.enabled = options.enabled or true;
-    options.limitDistance = options.limitDistance or false;
-    options.maxDistance = options.maxDistance or false;
-    options.visibleOnly = options.visibleOnly or false;
-    options.color = options.color or color3FromRGB(255, 255, 255);
-    options.transparency = options.transparency or 1;
-    options.text = options.text or object.Name;
-    options.font = options.font or 2;
-    options.fontSize = options.fontSize or 13;
+    options.enabled = options.enabled or true
+    options.limitDistance = options.limitDistance or false
+    options.maxDistance = options.maxDistance or false
+    options.visibleOnly = options.visibleOnly or false
+    options.color = options.color or Color3.fromRGB(255, 255, 255)
+    options.transparency = options.transparency or 1
+    options.text = options.text or object.Name
+    options.font = options.font or 2
+    options.fontSize = options.fontSize or 13
 
-    self.addObject(object, options);
+    -- Check if chams option is enabled
+    if options.chams then
+        -- Create the chams highlight instance
+        local highlight = Instance.new("Highlight")
+        highlight.Name = "Chams"
+
+        -- Customize the fill color and transparency
+        highlight.Color3 = options.color
+        highlight.FillTransparency = 1 - options.transparency
+
+        -- Customize the outline color and transparency
+        highlight.OutlineColor3 = Color3.new(0, 0, 0) -- Set your desired outline color here
+        highlight.OutlineTransparency = 0.5 -- Set the transparency of the outline color
+
+        -- Set the chams highlight properties
+        highlight.AlwaysOnTop = true
+        highlight.Transparency = 1 -- Set the overall transparency of the chams effect here
+
+        -- Parent the chams highlight to the object's parent
+        highlight.Parent = object.Parent
+
+        -- Insert the chams highlight into the options table
+        options.highlight = highlight
+    end
+
+    self.addObject(object, options)
 
     insert(self.conns, object.Parent.ChildRemoved:Connect(function(child)
-        if (child == object) then
-            self.removeObject(child);
+        if child == object then
+            self.removeObject(child)
+            
+            -- Destroy the chams highlight if it exists
+            if options.highlight then
+                options.highlight:Destroy()
+            end
         end
-    end));
+    end))
 
-    return options;
+    return options
 end
+
 
 function espLibrary:Unload()
     for _, connection in next, self.conns do
