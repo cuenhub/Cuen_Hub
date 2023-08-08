@@ -2,7 +2,7 @@
 
 # what is Cuen Hub?
 ## Cuen Hub is a work-in-progress reliable universal hub for roblox
-if you ever experience a bug, please dm cuen#8917 and will attempt to fix it
+if you ever experience a bug, please dm zenny zen zen#1170 and will attempt to fix it
 
 
 
