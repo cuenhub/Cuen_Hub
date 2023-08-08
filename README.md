@@ -24,8 +24,9 @@ Current UI Library - [Vynixius](https://github.com/RegularVynixu/UI-Libraries/tr
 
 Past UI Library - [Venyx](https://github.com/GreenDeno/Venyx-UI-Library)
 
-# status and supported games
+# status
 Online - 🟢
+
 
 > supported games
 ```
@@ -45,4 +46,13 @@ Online - 🟢
 - Hoopz (Basketball)
 - Identity Fraud
 - SUFFER
+```
+
+
+
+> supported executors 
+```
+- Fluxus 
+- Valyse 
+- ( not sure about other ones. )
 ```
