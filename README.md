@@ -1,3 +1,5 @@
+# ![logo](https://cdn.discordapp.com/attachments/1131486904278339655/1138503080275624067/169151068636268013.png) Cuen Hub
+
 # what is Cuen Hub?
 ## Cuen Hub is a work-in-progress reliable universal hub for roblox
 if you ever experience a bug, please dm cuen#8917 and will attempt to fix it
