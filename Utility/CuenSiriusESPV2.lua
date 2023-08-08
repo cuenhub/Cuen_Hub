@@ -109,7 +109,6 @@ local function parseColor(self, color, isOutline)
 	end
 	return tostring(color) == color and Color3.fromRGB(color:match("(%d+)%D+(%d+)%D+(%d+)")) or color;
 end
-
 -- esp object
 local EspObject = {};
 EspObject.__index = EspObject;
@@ -259,23 +258,23 @@ function EspObject:Render()
 		local box = visible.box;
 		box.Position = corners.topLeft;
 		box.Size = corners.bottomRight - corners.topLeft;
-		box.Color = tostring(parseColor(self, options.boxColor[1]));
-box.Transparency = options.boxColor[2];
+		box.Color = parseColor(self, tostring(options.boxColor[1]);
+		box.Transparency = options.boxColor[2];
 
 		local boxOutline = visible.boxOutline;
 		boxOutline.Position = box.Position;
 		boxOutline.Size = box.Size;
 		boxOutline.Color = parseColor(self, options.boxOutlineColor[1], true);
-boxOutline.Transparency = options.boxOutlineColor[2];
+		boxOutline.Transparency = options.boxOutlineColor[2];
 	end
 
 	visible.boxFill.Visible = enabled and onScreen and options.boxFill;
 	if visible.boxFill.Visible then
 		local boxFill = visible.boxFill;
-boxFill.Position = corners.topLeft;
-boxFill.Size = corners.bottomRight - corners.topLeft;
-boxFill.Color = tostring(parseColor(self, options.boxFillColor[1]));
-boxFill.Transparency = options.boxFillColor[2];
+		boxFill.Position = corners.topLeft;
+		boxFill.Size = corners.bottomRight - corners.topLeft;
+		boxFill.Color = parseColor(self, options.boxFillColor[1]);
+		boxFill.Transparency = options.boxFillColor[2];
 	end
 
 	visible.healthBar.Visible = enabled and onScreen and options.healthBar;
@@ -305,7 +304,7 @@ boxFill.Transparency = options.boxFillColor[2];
 		healthText.Text = round(self.health) .. "hp";
 		healthText.Size = interface.sharedSettings.textSize;
 		healthText.Font = interface.sharedSettings.textFont;
-		healthText.Color = parseColor(self, options.healthTextColor[1]);
+		healthText.Color = parseColor(self, tostring(options.healthTextColor[1]));
 		healthText.Transparency = options.healthTextColor[2];
 		healthText.Outline = options.healthTextOutline;
 		healthText.OutlineColor = parseColor(self, options.healthTextOutlineColor, true);
@@ -317,7 +316,7 @@ boxFill.Transparency = options.boxFillColor[2];
 		local name = visible.name;
 		name.Size = interface.sharedSettings.textSize;
 		name.Font = interface.sharedSettings.textFont;
-		name.Color = parseColor(self, options.nameColor[1]);
+		name.Color = parseColor(self, tostring(options.nameColor[1]));
 		name.Transparency = options.nameColor[2];
 		name.Outline = options.nameOutline;
 		name.OutlineColor = parseColor(self, options.nameOutlineColor, true);
