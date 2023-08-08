@@ -11,7 +11,7 @@ loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/cuenhub/Cuen_Hub
 ```
 
 
-Cuen Hub is updated every week as more and more gets added into the script.
+Cuen Hub is updated oftenly as more and more gets added into the script.
 
 # UI Libraries used
 
@@ -21,3 +21,26 @@ Current UI Library - [Vynixius](https://github.com/RegularVynixu/UI-Libraries/tr
 
 
 Past UI Library - [Venyx](https://github.com/GreenDeno/Venyx-UI-Library)
+
+# status and supported games
+Online - 🟢
+
+> supported games
+```
+- Greenville
+- Natural Disaster Survival
+- Building towers to fly farther
+- Clock In (Chapter 1)
+- The Sleep Experiment Classic
+- Lunar Will [Superhero RP] (made this for fun, i dont roleplay)
+- Math Difficulty Chart Obby
+- Mega Treehouse Tycoon
+- Muscle Legends
+- Paint a Friend!
+- Only Up Blox !
+- Nullxiety
+- Volleyball 4.2
+- Hoopz (Basketball)
+- Identity Fraud
+- SUFFER
+```
