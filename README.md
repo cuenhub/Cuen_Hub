@@ -28,7 +28,7 @@ Past UI Library - [Venyx](https://github.com/GreenDeno/Venyx-UI-Library)
 Online - 🟢
 
 
-> supported games
+> supported games ( sometimes games here are listed but not yet supported in the current version )
 ```
 - Greenville
 - Natural Disaster Survival
