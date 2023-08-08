@@ -107,7 +107,7 @@ local function parseColor(self, color, isOutline)
 	if color == "Team Color" or (self.interface.sharedSettings.useTeamColor and not isOutline) then
 		return self.interface.getTeamColor(self.player) or Color3.fromRGB(255,255,255);
 	end
-	return color;
+	return tostring(color) == color and Color3.fromRGB(color:match("(%d+)%D+(%d+)%D+(%d+)")) or color;
 end
 
 -- esp object
@@ -259,23 +259,23 @@ function EspObject:Render()
 		local box = visible.box;
 		box.Position = corners.topLeft;
 		box.Size = corners.bottomRight - corners.topLeft;
-		box.Color = parseColor(self, options.boxColor[1]);
-		box.Transparency = options.boxColor[2];
+		box.Color = tostring(parseColor(self, options.boxColor[1]));
+box.Transparency = options.boxColor[2];
 
 		local boxOutline = visible.boxOutline;
 		boxOutline.Position = box.Position;
 		boxOutline.Size = box.Size;
 		boxOutline.Color = parseColor(self, options.boxOutlineColor[1], true);
-		boxOutline.Transparency = options.boxOutlineColor[2];
+boxOutline.Transparency = options.boxOutlineColor[2];
 	end
 
 	visible.boxFill.Visible = enabled and onScreen and options.boxFill;
 	if visible.boxFill.Visible then
 		local boxFill = visible.boxFill;
-		boxFill.Position = corners.topLeft;
-		boxFill.Size = corners.bottomRight - corners.topLeft;
-		boxFill.Color = parseColor(self, options.boxFillColor[1]);
-		boxFill.Transparency = options.boxFillColor[2];
+boxFill.Position = corners.topLeft;
+boxFill.Size = corners.bottomRight - corners.topLeft;
+boxFill.Color = tostring(parseColor(self, options.boxFillColor[1]));
+boxFill.Transparency = options.boxFillColor[2];
 	end
 
 	visible.healthBar.Visible = enabled and onScreen and options.healthBar;
